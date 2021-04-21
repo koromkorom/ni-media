@@ -28,6 +28,10 @@ pipeline {
         }
     }
 
+
+  }
+}
+
 def runCommand( command )
 {
     if(isUnix())
@@ -38,6 +42,4 @@ def runCommand( command )
     {
         bat command
     }
-}
-  }
 }
