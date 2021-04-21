@@ -27,5 +27,17 @@ pipeline {
         echo 'deploying the application'
         }
     }
+
+def runCommand( command )
+{
+    if(isUnix())
+    {
+        sh command
+    }
+    else
+    {
+        bat command
+    }
+}
   }
 }
