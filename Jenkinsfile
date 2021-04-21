@@ -7,14 +7,18 @@ pipeline {
     stage("build") {
       steps {
         echo 'building the application'
-        cmakeBuild(installation: 'InSearchPath', buildDir: 'build', sourceDir: '.',)
+        runCommand( 'cmake -E remove_directory build')                             // make sure the build is clean
+        runCommand( 'cmake -B build ')
+        runCommand( 'cmake --build build')
+            
+        echo '----- CMake project was build successfully -----'
         }
     }
     
     stage("test") {
       steps {
         echo 'testing the application'
-        ctest(installation: 'InSearchPath')
+        runCommand( 'ctest --test-dir build')
         }
     }
     
