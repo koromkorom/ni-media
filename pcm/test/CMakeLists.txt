@@ -33,7 +33,7 @@ add_src_group (FILES_test_all test_pcm_detail FILES_test_pcm_detail)
 
 add_executable              ( pcm_test  ${FILES_test_all} )
 target_include_directories  ( pcm_test PRIVATE . )
-target_link_libraries       ( pcm_test PRIVATE pcm GTest::GTest)
+target_link_libraries       ( pcm_test PRIVATE pcm gtest)
 
 if(MSVC)
   target_compile_options    ( pcm_test PRIVATE /wd4512 /bigobj)

@@ -125,7 +125,7 @@ endif()
 
 add_executable              ( audiostream_test  ${FILES_test_all} )
 target_include_directories  ( audiostream_test PRIVATE . ../src )
-target_link_libraries       ( audiostream_test PRIVATE audiostream GTest::GTest)
+target_link_libraries       ( audiostream_test PRIVATE audiostream gtest)
 
 if(MSVC)
   target_compile_options      ( audiostream_test PRIVATE /wd4512 /bigobj)
