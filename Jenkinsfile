@@ -7,7 +7,7 @@ pipeline {
     stage("build") {
       steps {
         echo 'building the application'
-        runCommand( 'cmake -E remove_directory build')                             // make sure the build is clean
+        //runCommand( 'cmake -E remove_directory build')                             // make sure the build is clean
         runCommand( 'cmake -B build ')
         runCommand( 'cmake --build build')
             
