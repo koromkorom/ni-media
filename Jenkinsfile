@@ -7,7 +7,7 @@ pipeline {
     stage("build") {
       steps {
         echo 'building the application'
-        cmakeBuild(installation: 'InSearchPath')
+        cmakeBuild(installation: 'InSearchPath', buildDir: 'build', sourceDir: '.',)
         }
     }
     
