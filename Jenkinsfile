@@ -38,7 +38,7 @@ pipeline {
         container('alpine') {
           sh 'cmake -DNIMEDIA_TESTS=ON'
           sh 'git lfs pull -X ""'
-          sh 'cmake --build . --target test'
+          sh 'cmake --build build --target test'
         }
       }
     }
