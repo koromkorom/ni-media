@@ -1,45 +1,37 @@
 pipeline {
-
-  agent any
-  
-  stages {
-  
-    stage("build") {
-      steps {
-        echo 'building the application'
-        //runCommand( 'cmake -E remove_directory build')                             // make sure the build is clean
-        runCommand( 'cmake -B build ')
-        runCommand( 'cmake --build build')
-            
-        echo '----- CMake project was build successfully -----'
-        }
+  agent {
+    kubernetes {
+      yaml """\
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          labels:
+            some-label: some-label-value
+        spec:
+          containers:
+          - name: alpine
+            image: alpine
+            command:
+            - cat
+            tty: true
+        """.stripIndent()
     }
-    
-    stage("test") {
-      steps {
-        echo 'testing the application'
-        runCommand( 'ctest --test-dir build')
-        }
-    }
-    
-    stage("deploy") {
-      steps {
-        echo 'deploying the application'
-        }
-    }
-
-
   }
-}
-
-def runCommand( command )
-{
-    if(isUnix())
-    {
-        sh command
+  stages {
+    stage('setup') {
+      steps {
+        container('alpine') {
+          sh 'apk add cmake'
+        }
+      }
     }
-    else
-    {
-        bat command
+    stage('build') {
+      steps {
+        container('alpine') {
+          sh 'cmake -B build'
+          sh 'cmake --build build'
+        }
+      }
     }
+  }
 }
