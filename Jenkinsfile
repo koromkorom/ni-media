@@ -36,7 +36,7 @@ pipeline {
     stage('test') {
       steps {
         container('alpine') {
-          sh 'cmake -DNIMEDIA_TESTS=ON'
+          sh 'cmake -DNIMEDIA_TESTS=ON -DNIMEDIA_AUDIOSTREAM_TESTS=OFF'
           sh 'git lfs pull -X ""'
           sh 'cmake --build build --target test'
         }
